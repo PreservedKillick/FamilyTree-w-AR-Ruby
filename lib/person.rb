@@ -25,21 +25,22 @@ def self.show_grandpeople
 
     p1 = Person.find(person.parent.parent1_id)
     p2 = Person.find(person.parent.parent2_id)
-    if "p1.parent_id IS NOT NULL"  #p1.parent_id != nil
+    if p1.parent != nil
       gp1 = Person.find(p1.parent.parent1_id)
       grandparents << gp1.name
       gp2 = Person.find(p1.parent.parent2_id)
       grandparents << gp2.name
     end
-    if "p2.parent_id IS NOT NULL"
+    if p2.parent != nil
       gp3 = Person.find(p2.parent.parent1_id)
       grandparents << gp3.name
       gp4 = Person.find(p2.parent.parent2_id)
       grandparents << gp4.name
     end
-    if "p1.parent_id IS NOT NULL" || "p2.parent_id IS NOT NULL"
+    if p1.parent != nil || p2.parent != nil
       grandchildren << person.name
     end
+    binding.pry
     grandparents
     grandchildren
   end

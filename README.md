@@ -9,6 +9,6 @@ Future features:
 * Tracking children DONE
 * Reporting parents DONE
 
-* Reporting siblings, cousins, uncles/aunts, etc. (WORKING ON GRANDPARENTS)
+* Reporting siblings, cousins, uncles/aunts, etc. (WORKING DISPLAYING ON GRANDPARENTS)
 
 * Tracking divorces

@@ -32,11 +32,11 @@ def menu
       list
     when 'p'
       list
-      puts "Is the child already in the family tree? 'Y' or 'N'"
+      puts "\n\nIs the child already in the family tree? 'Y' or 'N'\n"
       input = gets.chomp
       case input
       when 'y'
-        puts "Enter the number of the child"
+        puts "\n\nEnter the number of the child"
         child = Person.all[gets.chomp.to_i - 1]
         add_parent(child)
       when 'n'
@@ -60,6 +60,7 @@ def menu
 end
 
 def add_person
+  system "clear"
   puts 'What is the name of the family member?'
   name = gets.chomp
   new_person = Person.create(:name => name)
@@ -76,6 +77,7 @@ def add_person
 end
 
 def add_parent(child)
+  system "clear"
   list
   puts "Are the parents on the list? 'Y' or 'N'"
   input = gets.chomp.downcase
@@ -97,12 +99,8 @@ def add_parent(child)
   end
 end
 
-
-# def add_brother
-#   Brother.create(:)
-# end
-
 def add_marriage
+  system "clear"
   list
   puts 'What is the number of the first spouse?'
   spouse1 = Person.all[gets.chomp.to_i - 1]
@@ -114,14 +112,6 @@ def add_marriage
   spouse2.update(:couple_id => new_couple.id)
 end
 
-def list
-  puts 'Here are all your relatives:'
-  people = Person.all
-  current_people = people.each_with_index do |person, index|
-    puts "#{index+1}" + " " + person.name
-  end
-  puts "\n"
-end
 
 def show_grandparents
 
@@ -152,7 +142,7 @@ def show_parents
   parent1 = Person.find(person.parent.parent1_id)
   parent2 = Person.find(person.parent.parent2_id)
   puts "\n\n#{person.name}'s parents are #{parent1.name} and #{parent2.name}.\n"
-  puts "\nWould you like to see all parents and their respective children? Y/N"
+  puts "\n\nWould you like to see all parents and their respective children? Y/N"
   if gets.chomp.upcase == "Y"
 
     Parent.all.each do |parent|
@@ -164,7 +154,7 @@ def show_parents
       children = Person.where(:parent_id => parent.id)
       children_names =[]
       children.each { |child| children_names << child.name }
-      puts "\n#{parents[0]} and #{parents[1]} are the parents of #{children_names.join(', ')}"
+      puts "\n\n#{parents[0]} and #{parents[1]} are the parents of #{children_names.join(', ')}"
     end
     puts "\n\n\n"
   elsif gets.chomp.upcase == 'N'
@@ -173,6 +163,16 @@ def show_parents
     puts "That is not a valid entry. Please try again."
   end
 end
+
+###########################################################
+def list
+  puts "Here are all of the members of this family tree:\n"
+  Person.all.each_with_index do |person, index|
+    puts "#{index+1}" + " " + person.name
+  end
+  puts "\n"
+end
+
 
 menu
 
